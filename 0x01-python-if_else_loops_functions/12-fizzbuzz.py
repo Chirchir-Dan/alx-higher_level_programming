@@ -10,8 +10,7 @@ def fizzbuzz():
             print("Buzz", end=' ')
         else:
             print(i, end=' ')
-    
-    print()  # Add a newline after the loop
 
-# Call the function to print the FizzBuzz sequence
-fizzbuzz()
+if __name__ == "__main__":
+    fizzbuzz()
+    print()  # Add a newline after the loop if executed directly
