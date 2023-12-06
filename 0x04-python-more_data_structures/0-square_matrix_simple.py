@@ -16,4 +16,3 @@ def square_matrix_simple(matrix=[]):
         result_matrix.append(squared_row)
 
     return result_matrix
-
