@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/bash/python3
 """
 This module defines a Rectangel class based on 1-Rectangle.py
 """
