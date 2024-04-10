@@ -1,0 +1,24 @@
+>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+# Test printing name with both first and last name
+>>> say_my_name("John", "Doe")
+My name is John Doe
+
+# Test printing name with only first name
+>>> say_my_name("Alice")
+My name is Alice
+
+# Test printing name with non-string first name (expecting TypeError)
+>>> try:
+...     say_my_name(123, "Smith")
+... except TypeError as e:
+...     print(e)
+first_name must be a string
+
+# Test printing name with non-string last name (expecting TypeError)
+>>> try:
+...     say_my_name("Jane", 456)
+... except TypeError as e:
+...     print(e)
+last_name must be a string
+
