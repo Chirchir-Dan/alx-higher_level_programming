@@ -30,3 +30,18 @@ another test.
 
 # Test text indentation with empty text (expecting nothing to be printed)
 >>> text_indentation("")
+
+
+# Test for missing one argument
+>>> try:
+...	text_indentation()
+... except TypeError as e:
+...	print(e)
+text_indentation() missing 1 required positional argument: 'text'
+
+# Test for text not being a string
+>>> try:
+...	text_indentation(123)
+... except TypeError as e:
+...	print(e)
+text must be a string
