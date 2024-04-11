@@ -6,7 +6,7 @@ My name is John Doe
 
 # Test printing name with only first name
 >>> say_my_name("Alice")
-My name is Alice
+My name is Alice 
 
 # Test printing name with non-string first name (expecting TypeError)
 >>> try:
