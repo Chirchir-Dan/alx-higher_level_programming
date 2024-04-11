@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+"""
+This module provides a function that prints a name
+"""
+
+
 def say_my_name(first_name, last_name=""):
     """
     Print the name in the format "My name is <first name> <last name>".
