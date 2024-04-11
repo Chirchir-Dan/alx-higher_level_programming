@@ -54,13 +54,51 @@ class TestMaxInteger(unittest.TestCase):
 
     def test_max_integer_strings(self):
         """Test with a list of strings."""
-        result = max_integer(["apple", "banana", "orange"])
-        self.assertIsNone(result)
+        with self.assertRaises(TypeError):
+            max_integer([1, 2, "3", 4, "5"])
 
     def test_max_integer_none(self):
         """Test with None as input."""
-        result = max_integer(None)
+        with self.assertRaises(TypeError):
+            max_integer(None)
+
+    def test_max_at_end(self):
+        """Test for max integer at the end of the list."""
+        result = max_integer([1, 2, 3, 4, 5])
+        self.assertEqual(result, 5)
+
+    def test_max_at_beginning(self):
+        """Test for max integer at the beginning of the list."""
+        result = max_integer([5, 4, 3, 2, 1])
+        self.assertEqual(result, 5)
+
+    def test_max_in_middle(self):
+        """Test for max integer in the middle of the list."""
+        result = max_integer([1, 5, 3, 2, 4])
+        self.assertEqual(result, 5)
+
+    def test_one_negative_number(self):
+        """Test for a list with one negative number."""
+        result = max_integer([-1, 2, 3, 4, 5])
+        self.assertEqual(result, 5)
+
+    def test_only_negative_numbers(self):
+        """Test for a list with only negative numbers."""
+        result = max_integer([-1, -2, -3, -4, -5])
+        self.assertEqual(result, -1)
+
+    def test_list_of_one_element(self):
+        """Test for a list with only one element."""
+        result = max_integer([42])
+        self.assertEqual(result, 42)
+
+    def test_empty_list(self):
+        """Test for an empty list."""
+        result = max_integer([])
         self.assertIsNone(result)
+
+    # Add any additional test cases here
+
 
 
 if __name__ == '__main__':
