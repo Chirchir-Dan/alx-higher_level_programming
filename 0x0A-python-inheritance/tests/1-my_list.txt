@@ -1,0 +1,31 @@
+# MyList Class Doctests
+
+# Test printing an empty list
+>>> my_list = MyList([])
+>>> my_list.print_sorted()
+[]
+
+# Test printing a list with one element
+>>> my_list = MyList([5])
+>>> my_list.print_sorted()
+[5]
+
+# Test printing a list with multiple elements, including negative numbers
+>>> my_list = MyList([3, -1, 5, -2, 4])
+>>> my_list.print_sorted()
+[-2, -1, 3, 4, 5]
+
+# Test printing a list with duplicate elements
+>>> my_list = MyList([3, 1, 5, 2, 4, 3, 5, 1])
+>>> my_list.print_sorted()
+[1, 1, 2, 3, 3, 4, 5, 5]
+
+# Test printing a list with all elements being the same
+>>> my_list = MyList([1, 1, 1, 1, 1])
+>>> my_list.print_sorted()
+[1, 1, 1, 1, 1]
+
+# Test printing a list with large elements
+>>> my_list = MyList([1000000, 10000000, 1000, 10000, 100])
+>>> my_list.print_sorted()
+[100, 1000, 10000, 1000000, 10000000]
