@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 """
 This module contains a function to lookup attributes and methods of an object
 """
