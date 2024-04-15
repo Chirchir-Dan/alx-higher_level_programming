@@ -17,21 +17,10 @@ def text_indentation(text):
         TypeError: If text is not a string.
     """
 
-    if not isinstance(text, int):
+    if not isinstance(text, str):
         raise TypeError("text must be a string")
-
-    # initializes a list to store lines of the formatted text
-    formatted_lines = []
-
-    # Iterate through each character in the text
-    for char in text:
-        # Append the characters to the current line
-        formatted_lines[-1] += char if formatted_lines else char
-
-        # If the character is '.', '?', or ':', add two lines
-        if char in ".?:":
-            formatted_lines[-1] += '\n\n'
-
-    # print the formatted text
-    for line in formatted_lines:
-        print(linem, end='')
+    for delim in ".?:":
+        text = (delim + "\n\n").join(
+                [line.strip(" ") for line in text.split(delim)]
+                )
+    print("{}".format(text), end="")

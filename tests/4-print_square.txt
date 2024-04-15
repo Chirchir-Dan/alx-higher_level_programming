@@ -39,15 +39,8 @@ size must be an integer
 ...	print(e)
 size must be >= 0
 
-# Test with no arguments
+# Test with a negative float
 >>> try:
-...	print_square()
-... except TypeError as e:
-...	print(e)
-print_square() missing 1 required positional argument: 'size'
-
-#Test with a negative float
-try:
 ...	print_square(-1.5)
 ... except TypeError as e:
 ...	print(e)

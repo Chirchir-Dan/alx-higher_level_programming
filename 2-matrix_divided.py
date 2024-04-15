@@ -24,16 +24,14 @@ def matrix_divided(matrix, div):
     # Check if matrix is a list of lists of integers or floats
     if not isinstance(matrix, list) or \
             not all(isinstance(row, list) for row in matrix):
-        raise TypeError(
-                "matrix must be a matrix (list of lists) of integers/floats"
-                )
+        raise TypeError("matrix must be a matrix \
+                (list of lists) of integers/floats")
 
     # Check if all elements of the matrix are integers or floats
     for row in matrix:
         if not all(isinstance(num, (int, float)) for num in row):
-            raise TypeError(
-                "matrix must be a matrix (list of lists) of integers/floats"
-                    )
+            raise TypeError("matrix must be a matrix\
+                    (list of lists) of integers/floats")
 
     # Check if div is a number
     if not isinstance(div, (int, float)):

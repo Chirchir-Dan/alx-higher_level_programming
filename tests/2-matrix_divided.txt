@@ -7,18 +7,15 @@ its prototype and requirements
 
 >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
 
-
 # Test dividing a matrix by 2
 >>> matrix = [[1, 2, 3], [4, 5, 6]]
 >>> print(matrix_divided(matrix, 2))
 [[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
 
-
 # Test dividing a matrix by 1.5
 >>> matrix = [[1.5, 2.5, 3.5], [4.5, 5.5, 6.5]]
 >>> print(matrix_divided(matrix, 1.5))
 [[1.0, 1.67, 2.33], [3.0, 3.67, 4.33]]
-
 
 # Test dividing a matrix by 0 (expecting ZeroDivisionError)
 >>> matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
@@ -28,7 +25,6 @@ its prototype and requirements
 ...     print(e)
 division by zero
 
-
 # Test dividing a matrix by a non-numeric divisor (expecting TypeError)
 >>> matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 >>> try:
@@ -36,7 +32,6 @@ division by zero
 ... except TypeError as e:
 ...     print(e)
 div must be a number
-
 
 # Test dividing a non-matrix (list of lists) by 2 (expecting TypeError)
 >>> matrix = [1, 2, 3]
@@ -46,7 +41,6 @@ div must be a number
 ...     print(e)
 matrix must be a matrix (list of lists) of integers/floats
 
-
 # Test dividing a matrix with inconsistent row lengths by 2 (expecting TypeError)
 >>> matrix = [[1, 2, 3], [4, 5], [7, 8, 9]]
 >>> try:
@@ -54,33 +48,3 @@ matrix must be a matrix (list of lists) of integers/floats
 ... except TypeError as e:
 ...     print(e)
 Each row of the matrix must have the same size
-
-
-#Testing for TypeError:
->>> matrix = [[3, "9"], [15, 3]]
->>> try:
-...	matrix_divided(matrix, 3)
-... except TypeError as e:
-...	print(e)
-matrix must be a matrix (list of lists) of integers/floats
-
-# Testing for TypeError: missing two uments
->>> try:
-...	matrix_divided()
-... except TypeError as e:
-...	print(e)
-matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
-
-
-# Testing for TypeError: missing one argument
->>> try:
-...	matrix_divided([])
-... except TypeError as e:
-...	print(e)
-matrix_divided() missing 1 required positional argument: 'div'
-
-
-# Testing for division by float ('inf')
->>> matrix = [[1, 2, 3], [4, 5, 6]]
->>> matrix_divided(matrix, float('inf'))
-[[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]

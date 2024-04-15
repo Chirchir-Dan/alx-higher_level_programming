@@ -1,4 +1,4 @@
-============================================================================
+========================================================================
 Test cases for the add_integer function.
 
 These test cases ensure that the add_integer function behaves as expected.
