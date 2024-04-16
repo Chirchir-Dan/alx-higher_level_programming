@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+This module adds command-line arguments to a pyhton list \
+    and saves them to a JSON file
+"""
+
 
 import sys
 
