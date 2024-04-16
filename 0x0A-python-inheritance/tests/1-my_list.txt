@@ -30,3 +30,52 @@
 >>> my_list = MyList([1000000, 10000000, 1000, 10000, 100])
 >>> my_list.print_sorted()
 [100, 1000, 10000, 1000000, 10000000]
+
+# Test for correct Class type:
+>>> my_list = MyList()
+>>> type(my_list) == MyList
+True
+
+# Test for correct instance type
+>>> my_list = MyList()
+>>> isinstance(my_list, list)
+True
+
+# Test printing a list with all elements being the same
+>>> my_list = MyList([1, 1, 1, 1, 1])
+>>> my_list.print_sorted()
+[1, 1, 1, 1, 1]
+
+# Test printing a list with duplicate elements
+>>> my_list = MyList([3, 1, 5, 2, 4, 3, 5, 1])
+>>> my_list.print_sorted()
+[1, 1, 2, 3, 3, 4, 5, 5]
+
+# Test printing a list with large elements
+>>> my_list = MyList([1000000, 10000000, 1000, 10000, 100])
+>>> my_list.print_sorted()
+[100, 1000, 10000, 1000000, 10000000]
+
+# Test printing a list with zero
+>>> my_list = MyList([0])
+>>> my_list.print_sorted()
+[0]
+
+# Test type of print_sorted method
+>>> type(MyList.__dict__['print_sorted'])
+<class 'function'>
+
+# Test calling print_sorted method via class with no args
+>>> MyList.print_sorted()
+Traceback (most recent call last):
+TypeError: MyList.print_sorted() missing 1 required positional argument: 'self'
+
+# Test calling print_sorted method with 1 arg
+>>> my_list.print_sorted([4, 2, 5])
+Traceback (most recent call last):
+TypeError: MyList.print_sorted() takes 1 positional argument but 2 were given
+
+# Test calling print_sorted method with 2 args
+>>> my_list.print_sorted([4, 2, 5], 1)
+Traceback (most recent call last):
+TypeError: MyList.print_sorted() takes 1 positional argument but 3 were given
