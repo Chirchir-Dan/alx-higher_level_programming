@@ -1,0 +1,54 @@
+=======================================================================
+Test cases for the print_square function.
+
+These test cases ensure that the print_square fucntion correctly prints a square with the character #.
+=======================================================================
+
+>>> print_square = __import__('4-print_square').print_square
+
+# Test printing a square with size 5
+>>> print_square(5)
+#####
+#####
+#####
+#####
+#####
+
+# Test printing with size 1
+>>> print_square(1)
+#
+
+# Test with a string
+>>> try:
+...	print_square('6')
+... except TypeError as e:
+... 	print(e)
+size must be an integer
+
+# Test with a float
+>>> try:
+...	print_square(1.5)
+... except TypeError as e:
+...	print(e)
+size must be an integer
+
+# Test with a negative size
+>>> try:
+...	print_square(-1)
+... except ValueError as e:
+...	print(e)
+size must be >= 0
+
+# Test with no arguments
+>>> try:
+...	print_square()
+... except TypeError as e:
+...	print(e)
+print_square() missing 1 required positional argument: 'size'
+
+#Test with a negative float
+try:
+...	print_square(-1.5)
+... except TypeError as e:
+...	print(e)
+size must be an integer

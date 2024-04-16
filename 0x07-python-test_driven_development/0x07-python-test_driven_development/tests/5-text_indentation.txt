@@ -1,0 +1,47 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+# Test text indentation with a simple sentence
+>>> text_indentation("This is a test.")
+This is a test.
+<BLANKLINE>
+
+
+# Test text indentation with multiple sentences
+>>> text_indentation("This is a test. And another test? Yes, indeed!")
+This is a test.
+<BLANKLINE>
+And another test?
+<BLANKLINE>
+Yes, indeed!
+
+
+
+# Test text indentation with sentences containing colons
+>>> text_indentation("First sentence: this is a test. Second sentence: another test.")
+First sentence:
+<BLANKLINE>
+this is a test.
+<BLANKLINE>
+Second sentence:
+<BLANKLINE>
+another test.
+<BLANKLINE>
+
+
+# Test text indentation with empty text (expecting nothing to be printed)
+>>> text_indentation("")
+
+
+# Test for missing one argument
+>>> try:
+...	text_indentation()
+... except TypeError as e:
+...	print(e)
+text_indentation() missing 1 required positional argument: 'text'
+
+# Test for text not being a string
+>>> try:
+...	text_indentation(123)
+... except TypeError as e:
+...	print(e)
+text must be a string
