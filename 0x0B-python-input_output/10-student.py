@@ -34,11 +34,12 @@ class Student:
             attrs (list): A list of strings containing attribute names.
 
         Returns:
-            dict: A dictionary containing the attributes of the Student instance.
+            dict: A dictionary containing the attributes of the \
+                    Student instance.
         """
         if attrs is None:
             return self.__dict__
-        
+
         student_dict = {}
         for attr in attrs:
             if attr in self.__dict__:
