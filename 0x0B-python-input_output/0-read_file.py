@@ -14,6 +14,6 @@ def read_file(filename=""):
         A list of text.
     """
 
-    with open(filename, encoding="utf-8") as f:
-        content = f.read()
-        print(content)
+    with open(filename, encoding="utf-8") as file:
+        for line in file:
+            print(line, end='')
