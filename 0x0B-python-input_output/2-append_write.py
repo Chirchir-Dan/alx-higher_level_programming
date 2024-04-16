@@ -8,7 +8,7 @@ This module provides a function that appends a string at the \
 def append_write(filename="", text=""):
     """
     Appends a string at the end of a text file
-    
+
     Args:
         filename (str): The name of the file to append to
         text (str): The string to append to the file.
