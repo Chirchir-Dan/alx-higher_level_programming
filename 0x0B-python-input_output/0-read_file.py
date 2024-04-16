@@ -14,6 +14,6 @@ def read_file(filename=""):
         A list of text.
     """
 
-    with open(filename, 'r', encoding="utf-8") as f:
+    with open(filename, encoding="utf-8") as f:
         content = f.read()
         print(content)
