@@ -24,7 +24,10 @@ def add_items_to_list_and_save():
     args = sys.argv[1:]
 
     # Load the existing List or initialize an empty list
-    items_list = load_obj("add_item.json") if args else []
+    try:
+        items_list = load_obj("add_item.json")
+    except (ValueError, FileNotFoundError):
+        items_list = []
 
     items_list.extend(args)
 
