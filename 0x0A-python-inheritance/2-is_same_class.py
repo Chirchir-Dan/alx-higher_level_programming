@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 """
 
 This module provides a function to check if object is an instance \
