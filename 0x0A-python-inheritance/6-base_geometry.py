@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module provides a class that inherits from a parent class
+This module provides a class that defines a function area
 """
 
 
