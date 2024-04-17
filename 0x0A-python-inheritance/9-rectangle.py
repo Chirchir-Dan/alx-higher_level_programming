@@ -1,30 +1,24 @@
 #!/usr/bin/python3
 """
-Module: 8-rectangle
+Defines a class Rectangle based on 8-base_geometry.py.
 
-This module contains the definition of the Rectangle class,
-which inherits from BaseGeometry.
+Attributes:
+    width (int): width of the rectangle.
+    height (int): height of the rectangle.
 """
 
 BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 
 class Rectangle(BaseGeometry):
-    """
-    Class representing a rectangle shape.
-
-    Attributes:
-        __width (int): The width of the rectangle.
-        __height (int): The height of the rectangle.
-    """
+    """Class Rectangle"""
 
     def __init__(self, width, height):
-        """
-        Initialize a rectangle with width and height.
+        """Creates new instances of Rectangle.
 
         Args:
-            width (int): The width of the rectangle.
-            height (int): The height of the rectangle.
+            width (int): width of rectangle.
+            height (int): height of rectangle.
         """
         super().__init__()
         self.__width = width
@@ -33,36 +27,30 @@ class Rectangle(BaseGeometry):
         self.integer_validator("height", height)
 
     def area(self):
-        """
-        Calculate the area of the rectangle.
+        """Calculates area of a rectangle.
 
         Returns:
-            int: The area of the rectangle.
+            int: area.
         """
         return self.__width * self.__height
 
     def __str__(self):
-        """
-        Return the string representation of the rectangle.
+        """Returns string representation of the rectangle.
 
         Returns:
-            str: The string representation of the rectangle.
+            str: string representation of rectangle.
         """
-        return f"[Rectangle] {self.__width}/{self.__height}"
-
-    def print(self):
-        """
-        Print the rectangle description.
-        """
-        print(self.__str__())
+        return "[Rectangle] {:d}/{:d}".format(self.__width, self.__height)
 
     def __dir__(self):
-        """
-        Override the __dir__() method to customize the list of
-        attributes and methods.
+        """Customizes the list of attributes and methods.
 
         Returns:
             list: List of attributes and methods specific to the
             Rectangle class.
         """
-        return [attr for attr in dir(self) if not attr.startswith('_')]
+        base_attrs = dir(BaseGeometry)
+        rectangle_attrs = [attr for attr in dir(self)
+                           if not attr.startswith('_')
+                           and attr not in base_attrs]
+        return rectangle_attrs
