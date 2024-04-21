@@ -6,6 +6,7 @@ This module provides a class Rectangle that inherits from class Basw
 
 from models.base import Base
 
+
 class Rectangle(Base):
     """
     inherits from class Base
@@ -114,10 +115,6 @@ class Rectangle(Base):
         Returns:
             int: The y-coordinate of the rectangle.
         """
-        if not isinstance(value, int):
-            raise TypeError("y must be an integer")
-        elif value < 0:
-            raise ValueError("x must be >= 0")
         return self.__y
 
     @y.setter
@@ -128,6 +125,36 @@ class Rectangle(Base):
         Args:
             value (int): The y-coordinate of the rectangle.
         """
-        if value < 0:
+        if not isinstance(value, int):
+            raise TypeError("y must be an integer")
+        elif value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
+
+    def area(self):
+        """
+        Calculates the area of the rectangle.
+
+        Returns:
+            int: The area of the rectangle
+        """
+        return self.__width * self.__height
+
+    def display(self):
+        """
+        Displays the Rectangle instance with the character #
+        """
+        for _ in range(self.y):
+            print()
+        for _ in range(self.height):
+            print(" " *self.x + "#" * self.width)
+
+    def __str__(self):
+        """
+        String representation of the Rectangle instance.
+
+        Returns:
+            str: [Rectangle] (<id>) <x>/<y> - <width>/<height>/<height>
+        """
+        return ("[Rectangle] ({}) {}/{} - {}/{}".format(
+                self.id, self.x, self.y, self.width, self.height))
