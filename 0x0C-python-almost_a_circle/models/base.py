@@ -108,7 +108,8 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """Writes the CSV serialization of a list of objects to a file.
+        """Writes the CSV serialization of a list of objects to a
+        file.
 
         Args:
             list_objs (list): A list of inherited Base instances.
@@ -135,16 +136,16 @@ class Base:
         Returns:
             list: A list of instantiated classes.
         """
-        filename = cls._name_ + ".csv"
+        filename = cls.__name__ + ".csv"
         try:
             with open(filename, "r", newline="") as csvfile:
-                if cls._name_ == "Rectangle":
+                if cls.__name__ == "Rectangle":
                     fieldnames = ["id", "width", "height", "x", "y"]
                 else:
                     fieldnames = ["id", "size", "x", "y"]
-                list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
-                list_dicts = [dict([k, int(v)] for k, v in d.items())
-                              for d in list_dicts]
+                    list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
+                    list_dicts = [dict([k, int(v)] for k, v in d.items())
+                        for d in list_dicts]
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
