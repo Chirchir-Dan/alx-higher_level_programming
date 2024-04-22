@@ -114,18 +114,35 @@ class Base:
         Returns:
             list: A list of instances loaded from the JSON file.
         """
-        filename = cls.__name__ + ".json"
+        filename = "{}.json".format(cls.__name__)
 
+        if os.path.exists(filename) is False:
+            return []
+
+        with open(filename, 'r') as f:
+            list_str = f.read()
+
+        list_cls = cls.from_json_string(list_str)
+        list_ins = []
+
+        for index in range(len(list_cls)):
+            list_ins.append(cls.create(**list_cls[index]))
+
+        return list_ins
+
+
+
+
+        """
         if not os.path.exists(filename):
             return []
-        try:
-            with open(filename, "r") as file:
-                json_data = file.read()
-                if not json_data:
-                    return []
-                data_list = json.loads(json_data)
-                instance_list = [cls.create(**data) for data in data_list]
-                return instance_list
+        with open(filename, "r") as file:
+            json_data = file.read()
+            if not json_data:
+                return []
+            data_list = json.loads(json_data)
+            instance_list = [cls.create(**data) for data in data_list]
+            return instance_list
         except (FileNotFoundError, json.JSONDecodeError) as e:
             print(f"Error loading from file: {e}")
-            return []
+            return []"""
