@@ -4,6 +4,7 @@ This module provides a class Base
 """
 
 
+import os.path
 import json
 
 
@@ -114,14 +115,17 @@ class Base:
             list: A list of instances loaded from the JSON file.
         """
         filename = cls.__name__ + ".json"
+
+        if not os.path.exists(filename):
+            return []
         try:
             with open(filename, "r") as file:
                 json_data = file.read()
-        except FileNotFoundError:
+                if not json_data:
+                    return []
+                data_list = json.loads(json_data)
+                instance_list = [cls.create(**data) for data in data_list]
+                return instance_list
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            print(f"Error loading from file: {e}")
             return []
-
-        data_list = json.loads(json_data)
-        instance_list = []
-        for data in data_list:
-            instance_list.append(cls.create(**data))
-        return instance_list
