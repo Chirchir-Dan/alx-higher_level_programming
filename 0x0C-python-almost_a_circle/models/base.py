@@ -107,30 +107,45 @@ class Base:
             return dummy_instance
 
     @classmethod
-    def load_from_file(cls):
+    def save_to_file_csv(cls, list_objs):
         """
-        Returns a list of instances loaded from a JSON file.
+        Serializes a list of objects to a CSV file.
 
-        The filename must be <Class name>.json.
-
-        If the file doesn’t exist, return an empty list.
-        Otherwise, return a list of instances of the class.
+        Args:
+            list_objs (list): A list of objects to serialize.
 
         Returns:
-            list: A list of instances loaded from the JSON file.
+            None
         """
-        filename = "{}.json".format(cls.__name__)
+        filename = f"{cls.__name__}.csv"
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            for obj in list_objs:
+                if cls.__name__ == "Rectangle":
+                    row = [obj.id, obj.width, obj.height, obj.x, obj.y]
+                elif cls.__name__ == "Square":
+                    row = [obj.id, obj.size, obj.x, obj.y]
+                writer.writerow(row)
 
-        if os.path.exists(filename) is False:
-            return []
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        Deserializes objects from a CSV file.
 
-        with open(filename, 'r') as f:
-            list_str = f.read()
-
-        list_cls = cls.from_json_string(list_str)
-        list_ins = []
-
-        for index in range(len(list_cls)):
-            list_ins.append(cls.create(**list_cls[index]))
-
-        return list_ins
+        Returns:
+            list: A list of deserialized objects.
+        """
+        filename = f"{cls.__name__}.csv"
+        objects = []
+        try:
+            with open(filename, 'r', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    if cls.__name__ == "Rectangle":
+                        obj = Rectangle(*map(int, row))
+                    elif cls.__name__ == "Square":
+                        obj = Square(*map(int, row))
+                    objects.append(obj)
+        except FileNotFoundError:
+            pass
+        return objects
