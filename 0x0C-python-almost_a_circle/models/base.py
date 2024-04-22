@@ -134,20 +134,3 @@ class Base:
             list_ins.append(cls.create(**list_cls[index]))
 
         return list_ins
-
-
-
-
-        """
-        if not os.path.exists(filename):
-            return []
-        with open(filename, "r") as file:
-            json_data = file.read()
-            if not json_data:
-                return []
-            data_list = json.loads(json_data)
-            instance_list = [cls.create(**data) for data in data_list]
-            return instance_list
-        except (FileNotFoundError, json.JSONDecodeError) as e:
-            print(f"Error loading from file: {e}")
-            return []"""
