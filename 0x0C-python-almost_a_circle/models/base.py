@@ -95,11 +95,16 @@ class Base:
             according to the dictionary.
         """
         # Create a dummy instance
-        dummy_instance = cls(1, 1)
-
-        # Update dummy instance with real values from dictionary
-        dummy_instance.update(**dictionary)
-        return dummy_instance
+        if cls.__name__ == "Rectangle":
+            from models.rectangle import Rectangle
+            dummy_instance = Rectangle(1, 1)
+            dummy_instance.update(**dictionary)
+            return dummy_instance
+        elif cls.__name__ == "Square":
+            from models.square import Square
+            dummy_instance = Square(1)
+            dummy_instance.update(**dictionary)
+            return dummy_instance
 
     @classmethod
     def load_from_file(cls):
