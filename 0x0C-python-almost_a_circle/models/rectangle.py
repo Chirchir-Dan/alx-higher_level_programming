@@ -173,8 +173,12 @@ class Rectangle(Base):
             **kwargs: The keyword arguments to assign.
                 Each key represents an attribute of the instance.
         """
+        # if args:
+        #  self.id, self.width, self.height, self.x, self.y = args
         if args:
-            self.id, self.width, self.height, self.x, self.y = args
+            attrs = ["id", "width", "height", "x", "y"]
+            for attr, value in zip(attrs, args):
+                setattr(self, attr, value)
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
@@ -187,7 +191,11 @@ class Rectangle(Base):
             dict: A dictionary containing the attributes of
             the rectangle.
         """
-        return vars(self)
+        dict_ = {}
+        for key, value in self.__dict__.items():
+            clean_key = key.replace("_Rectangle__", "")
+            dict_[clean_key] = value
+        return dict_
         """
         return
         {

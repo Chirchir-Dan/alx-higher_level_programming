@@ -87,12 +87,11 @@ class Square(Rectangle):
         Returns:
             dict: A dictionary containing the attributes of the square.
         """
-        """
-        return
-        {
-            "id": self.id,
-            "size": self.width,
-            "x": self.x,
-            "y": self.y
-        }"""
-        return vars(self)
+        dict_ = {}
+        for key, value in self.__dict__.items():
+            clean_key = key.replace("_Rectangle__", "")
+            if clean_key == "width" or clean_key == "height":
+                dict_["size"] = value
+            else:
+                dict_[clean_key] = value
+        return dict_
