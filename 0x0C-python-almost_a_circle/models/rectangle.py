@@ -196,12 +196,3 @@ class Rectangle(Base):
             clean_key = key.replace("_Rectangle__", "")
             dict_[clean_key] = value
         return dict_
-        """
-        return
-        {
-            "id": self.id,
-            "width": self.width,
-            "height": self.height,
-            "x": self.x,
-            "y": self.y
-        }"""
