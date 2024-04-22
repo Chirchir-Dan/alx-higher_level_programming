@@ -6,7 +6,8 @@ This module provides a class Base
 
 import os.path
 import json
-
+import csv
+import turtle
 
 class Base:
     """
@@ -147,6 +148,7 @@ class Base:
                               for d in list_dicts]
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
+            return []
 
     @staticmethod
     def draw(list_rectangles, list_squares):
@@ -188,4 +190,4 @@ class Base:
             turt.hideturtle()
 
         turtle.exitonclick()
-            return []
+        return []
