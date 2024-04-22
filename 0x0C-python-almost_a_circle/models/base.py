@@ -106,46 +106,81 @@ class Base:
             dummy_instance.update(**dictionary)
             return dummy_instance
 
-    @classmethod
+     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """
-        Serializes a list of objects to a CSV file.
+        """Serializes a list of rectangles or squares in csv.
 
         Args:
-            list_objs (list): A list of objects to serialize.
-
-        Returns:
-            None
+            cls (any): class.
+            list_objs (list): objects.
         """
-        filename = f"{cls.__name__}.csv"
-        with open(filename, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            for obj in list_objs:
-                if cls.__name__ == "Rectangle":
-                    row = [obj.id, obj.width, obj.height, obj.x, obj.y]
-                elif cls.__name__ == "Square":
-                    row = [obj.id, obj.size, obj.x, obj.y]
-                writer.writerow(row)
+        filename = cls.__name__ + ".csv"
+        with open(filename, 'w', newline="") as f:
+            writer = csv.writer(f)
+            if cls.__name__ == "Rectangle":
+                for i in list_objs:
+                    writer.writerow([i.id, i.width, i.height, i.x, i.y])
+            elif cls.__name__ == "Square":
+                for i in list_objs:
+                    writer.writerow([i.id, i.size, i.x, i.y])
 
     @classmethod
     def load_from_file_csv(cls):
-        """
-        Deserializes objects from a CSV file.
+        """deserializes a list of rectangles or squares in csv.
 
-        Returns:
-            list: A list of deserialized objects.
+        Args:
+            cls (any): class.
         """
-        filename = f"{cls.__name__}.csv"
-        objects = []
+        filename = cls.__name__ + ".csv"
+        my_obj = []
         try:
-            with open(filename, 'r', newline='') as csvfile:
-                reader = csv.reader(csvfile)
-                for row in reader:
+            with open(filename, 'r') as f:
+                csv_reader = csv.reader(f)
+                for elm in csv_reader:
                     if cls.__name__ == "Rectangle":
-                        obj = Rectangle(*map(int, row))
+                        dictionary = {"id": int(elm[0]), "width": int(elm[1]),
+                                      "height": int(elm[2]), "x": int(elm[3]),
+                                      "y": int(elm[4])}
                     elif cls.__name__ == "Square":
-                        obj = Square(*map(int, row))
-                    objects.append(obj)
-        except FileNotFoundError:
+                        dictionary = {"id": int(elm[0]), "size": int(elm[1]),
+                                      "x": int(elm[2]), "y": int(elm[3])}
+                    obj = cls.create(**dictionary)
+                    my_obj.append(obj)
+        except(Exception):
             pass
-        return objects
+        return(my_obj)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """ Opens a window and draws all the Rectangles and Squares
+
+        NOT COMPLETE!!!!!!
+
+        """
+        window = turtle.Screen()
+        turtle.speed(5)
+        turtle.pensize(5)
+        for rectangle in list_rectangles:
+            turtle.penup()
+            turtle.goto(rectangle.x, rectangle.y)
+            turtle.color("black")
+            turtle.pendown()
+            turtle.forward(rectangle.width)
+            turtle.left(90)
+            turtle.forward(rectangle.height)
+            turtle.left(90)
+            turtle.forward(rectangle.width)
+            turtle.left(90)
+            turtle.forward(rectangle.height)
+
+        for square in list_squares:
+            turtle.penup()
+            turtle.goto(square.x, square.y)
+            turtle.pendown()
+            for colors in ["red", "yellow", "purple", "blue"]:
+                turtle.color(colors)
+                turtle.forward(square.size)
+                turtle.left(90)
+        turtle.penup()
+
+        window.exitonclick()
