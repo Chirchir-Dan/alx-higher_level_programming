@@ -34,6 +34,7 @@ class Square(Rectangle):
             str: [Square] (<id>) <x>/<y> - <size>
         """
         return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
+
     @property
     def size(self):
         """
@@ -43,7 +44,7 @@ class Square(Rectangle):
             int: The size of the square.
         """
         return self.width
-    
+
     @size.setter
     def size(self, value):
         """
@@ -67,7 +68,7 @@ class Square(Rectangle):
             4th argument: y attribute
         **kwargs: The keyword arguments.
         Each key represents an attribute.
-    
+
         Note:
         **kwargs must be skipped if *args exists and is not empty.
         """
@@ -78,3 +79,20 @@ class Square(Rectangle):
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        """
+        Returns a dictionary representation of the Square object.
+
+        Returns:
+            dict: A dictionary containing the attributes of the square.
+        """
+        """
+        return
+        {
+            "id": self.id,
+            "size": self.width,
+            "x": self.x,
+            "y": self.y
+        }"""
+        return vars(self)
