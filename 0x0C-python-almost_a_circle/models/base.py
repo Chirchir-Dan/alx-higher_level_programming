@@ -109,6 +109,34 @@ class Base:
             return dummy_instance
 
     @classmethod
+    def load_from_file(cls):
+        """
+        Returns a list of instances loaded from a JSON file.
+
+        The filename must be <Class name>.json.
+
+        If the file doesn’t exist, return an empty list.
+        Otherwise, return a list of instances of the class.
+
+        Returns:
+            list: A list of instances loaded from the JSON file.
+        """
+        filename = "{}.json".format(cls.__name__)
+
+        if not os.path.exists(filename):
+            return []
+
+        with open(filename, 'r') as f:
+            json_string = f.read()
+
+        list_dicts = cls.from_json_string(json_string)
+        instance_list = [cls.create(**data) for data in list_dicts]
+
+        return instance_list
+
+
+
+    @classmethod
     def save_to_file_csv(cls, list_objs):
         """Writes the CSV serialization of a list of objects to a file.
 
