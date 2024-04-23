@@ -134,8 +134,6 @@ class Base:
 
         return instance_list
 
-
-
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """Writes the CSV serialization of a list of objects to a file.
