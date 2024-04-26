@@ -10,6 +10,11 @@ class TestSquare(unittest.TestCase):
         square = Square(1)
         self.assertEqual(square.size, 1)
 
+    def test_square_zero_size(self):
+        # Test Square with size = 0
+        with self.assertRaises(ValueError):
+            Square(0)
+
     def test_square_creation_with_coordinates(self):
         # Test Square(1, 2, 3)
         square = Square(1, 2, 3)

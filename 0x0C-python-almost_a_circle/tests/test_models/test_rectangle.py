@@ -22,6 +22,16 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(rect.x, 3)
         self.assertEqual(rect.y, 4)
 
+    def test_rectangle_zero_width(self):
+        # Test Rectangle with width = 0
+        with self.assertRaises(ValueError):
+            Rectangle(0, 2)
+
+    def test_rectangle_zero_height(self):
+        # Test Rectangle with height = 0
+        with self.assertRaises(ValueError):
+            Rectangle(1, 0)
+
     def test_invalid_width_type(self):
         # Test Rectangle("1", 2)
         with self.assertRaises(TypeError):
