@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 import unittest
 from models.square import Square
 
@@ -73,6 +74,93 @@ class TestSquare(unittest.TestCase):
         square = Square(1)
         square.update(id=89, size=2, x=3, y=4)
         self.assertEqual(str(square), "[Square] (89) 3/4 - 2")
+
+    def test_load_from_file_exists(self):
+        # Test load_from_file() when file exists
+        filename = "Square.json"
+        with open(filename, "w") as file:
+            file.write("[{\"id\": 1, \"size\": 2}]")
+
+        squares = Square.load_from_file()
+        self.assertEqual(len(squares), 1)
+        self.assertEqual(squares[0].id, 1)
+        self.assertEqual(squares[0].size, 2)
+
+        os.remove(filename)
+
+    def test_load_from_file_not_exists(self):
+        # Test load_from_file() when file doesn't exist
+        filename = "Square.json"
+        if os.path.exists(filename):
+            os.remove(filename)
+
+        squares = Square.load_from_file()
+        self.assertEqual(len(squares), 0)
+
+    def test_save_to_file_with_objects(self):
+        # Test save_to_file() with a list of objects
+        squares = [Square(1)]
+        Square.save_to_file(squares)
+
+        filename = "Square.json"
+        self.assertTrue(os.path.exists(filename))
+
+        with open(filename, "r") as file:
+            data = file.read()
+            self.assertNotEqual(data, "[]")
+
+        os.remove(filename)
+
+    def test_save_to_file_empty_list(self):
+        # Test save_to_file() with an empty list
+        squares = []
+        Square.save_to_file(squares)
+
+        filename = "Square.json"
+        self.assertTrue(os.path.exists(filename))
+
+        with open(filename, "r") as file:
+            data = file.read()
+            self.assertEqual(data, "[]")
+
+        os.remove(filename)
+
+    def test_save_to_file_with_none(self):
+        # Test save_to_file() with None
+        Square.save_to_file(None)
+
+        filename = "Square.json"
+        self.assertTrue(os.path.exists(filename))
+
+        with open(filename, "r") as file:
+            data = file.read()
+            self.assertEqual(data, "[]")
+
+        os.remove(filename)
+
+    def test_create_method_with_all_attributes(self):
+        # Test create() method with all attributes
+        square = Square.create(id=89, size=1, x=2, y=3)
+        self.assertEqual(square.id, 89)
+        self.assertEqual(square.size, 1)
+        self.assertEqual(square.x, 2)
+        self.assertEqual(square.y, 3)
+
+    def test_create_method_without_y_attribute(self):
+        # Test create() method without y attribute
+        square = Square.create(id=89, size=1, x=2)
+        self.assertEqual(square.id, 89)
+        self.assertEqual(square.size, 1)
+        self.assertEqual(square.x, 2)
+        self.assertEqual(square.y, 0)
+
+    def test_create_method_without_x_and_y_attributes(self):
+        # Test create() method without x and y attributes
+        square = Square.create(id=89, size=1)
+        self.assertEqual(square.id, 89)
+        self.assertEqual(square.size, 1)
+        self.assertEqual(square.x, 0)
+        self.assertEqual(square.y, 0)
 
 if __name__ == "__main__":
     unittest.main()
