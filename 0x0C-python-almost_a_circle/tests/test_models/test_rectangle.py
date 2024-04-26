@@ -32,6 +32,16 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(ValueError):
             Rectangle(1, 0)
 
+    def test_display_method(self):
+        # Test display() method
+        rect = Rectangle(3, 2)
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        rect.display()
+        sys.stdout = sys.__stdout__
+        rect_output = "###\n###\n"
+        self.assertEqual(captured_output.getvalue(), rect_output)
+
     def test_invalid_width_type(self):
         # Test Rectangle("1", 2)
         with self.assertRaises(TypeError):
