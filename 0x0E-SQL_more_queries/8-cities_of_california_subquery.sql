@@ -4,8 +4,6 @@
 -- Results are sorted in ascending order by cities.id.
 -- JOIN keyword is not used.
 
-USE $1;
-
 SELECT cities.id, cities.name
 FROM cities, states
 WHERE cities.state_id = states.id
