@@ -24,6 +24,7 @@ by states.id.
 import MySQLdb
 import sys
 
+
 def list_states(username, password, dbname):
     """
     Connects to the specified MySQL database and lists all states
@@ -42,7 +43,7 @@ def list_states(username, password, dbname):
     """
     try:
         db = MySQLdb.connect(host="localhost", user=username,
-                passwd=password, db=dbname, port=3306)
+                             passwd=password, db=dbname, port=3306)
 
         cursor = db.cursor()
         query = "SELECT * FROM states ORDER BY id ASC;"
@@ -57,6 +58,7 @@ def list_states(username, password, dbname):
 
     except MySQLdb.Error as e:
         print(f"Error {e}")
+
 
 if __name__ == "__main__":
     username = sys.argv[1]
