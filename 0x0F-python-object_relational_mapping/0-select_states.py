@@ -1,71 +1,24 @@
 #!/usr/bin/python3
+"""Lists all states with a name starting with 'N' from the database hbtn_0e_0_usa"""
 
-"""
-list_states.py
+if __name__ == '__main__':
+    import MySQLdb
+    import sys
 
-This module connects to a MySQL database and lists all states
-from a specified database.
-It takes three command-line arguments: MySQL username,
-MySQL password, and the database name.
+    db = MySQLdb.connect(
+        host='localhost',
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
+    )
 
-Usage:
-    python list_states.py <mysql_username> <mysql_password> <database_name>
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states WHERE BINARY name LIKE 'N%' ORDER BY id ASC;")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
 
-Arguments:
-    <mysql_username>    MySQL username to connect to the database
-    <mysql_password>    MySQL password to connect to the database
-    <database_name>     Name of the database to connect to
+    cur.close()
+    db.close()
 
-The script connects to a MySQL server running on localhost at
-port 3306 and retrieves
-all states from the specified database, sorted in ascending order
-by states.id.
-"""
-import MySQLdb
-import sys
-
-
-def list_states(username, password, dbname):
-    """
-    Connects to the specified MySQL database and lists all states
-    in ascending order by id.
-
-    Parameters:
-        username (str): The MySQL username.
-        password (str): The MySQL password.
-        dbname (str): The name of the database.
-
-    Returns:
-        None
-
-    Prints:
-        Each state as a tuple (id, name).
-    """
-    try:
-        db = MySQLdb.connect(host="localhost", user=username,
-                             passwd=password, db=dbname, port=3306)
-
-        cursor = db.cursor()
-        query = "SELECT * FROM states ORDER BY id ASC;"
-        cursor.execute(query)
-        results = cursor.fetchall()
-
-        for row in results:
-            print(row)
-
-        cursor.close()
-        db.close()
-
-    except MySQLdb.Error as e:
-        print(f"Error {e}")
-
-
-if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python 0-select_states.py <mysql_username>\
-                <mysql_opassword< <database_name>")
-    username = sys.argv[1]
-    password = sys.argv[2]
-    dbname = sys.argv[3]
-
-    list_states(username, password, dbname)
