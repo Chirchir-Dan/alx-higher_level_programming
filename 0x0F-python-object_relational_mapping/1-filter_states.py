@@ -3,8 +3,8 @@
 """
 list_states.py
 
-This module connects to a MySQL database and lists all states
-from a specified database.
+This module connects to a MySQL database and lists states whose
+names start with 'N' from a specified database.
 It takes three command-line arguments: MySQL username,
 MySQL password, and the database name.
 
@@ -17,18 +17,17 @@ Arguments:
     <database_name>     Name of the database to connect to
 
 The script connects to a MySQL server running on localhost at
-port 3306 and retrieves
-all states from the specified database, sorted in ascending order
-by states.id.
+port 3306 and retrieves states whose names start with 'N', sorted
+in ascending order by states.id.
 """
 import MySQLdb
 import sys
 
 
-def list_states(username, password, dbname):
+def list_states_starting_with_N(username, password, dbname):
     """
-    Connects to the specified MySQL database and lists all states
-    in ascending order by id.
+    Connects to the specified MySQL database and lists states
+    whose names start with 'N' in ascending order by id.
 
     Parameters:
         username (str): The MySQL username.
@@ -46,7 +45,8 @@ def list_states(username, password, dbname):
                              passwd=password, db=dbname, port=3306)
 
         cursor = db.cursor()
-        query = "SELECT * FROM states ORDER BY id ASC;"
+        query = "SELECT id, name FROM states WHERE name LIKE 'N%'\
+                ORDER BY id ASC;"
         cursor.execute(query)
         results = cursor.fetchall()
 
@@ -68,4 +68,4 @@ if __name__ == "__main__":
     password = sys.argv[2]
     dbname = sys.argv[3]
 
-    list_states(username, password, dbname)
+    list_states_starting_with_N(username, password, dbname)
