@@ -1,38 +1,24 @@
 #!/usr/bin/python3
-"""
-Lists all State objects and corresponding City objects
-from the database hbtn_0e_14_usa
-"""
-
-import sys
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from relationship_state import Base, State
-from relationship_city import City
+"""lists all State objects, and corresponding City objects,
+contained in the database hbtn_0e_101_usa"""
 
 if __name__ == "__main__":
-    uname = sys.argv[1]
-    pwd = sys.argv[2]
-    db = sys.argv[3]
 
-    # Create engine to connect to MySQL server
-    engine = create_engine(
-            'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(uname, pwd, db))
+    import sys
+    from relationship_state import Base, State
+    from relationship_city import City
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import Session
+    from sqlalchemy.schema import Table
 
-    # Bind Base class to the engine
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                           .format(sys.argv[1], sys.argv[2],
+                                   sys.argv[3]), pool_pre_ping=True)
     Base.metadata.create_all(engine)
 
-    # Create a configured "Session" class
-    Session = sessionmaker(bind=engine)
-
-    # Create a Session
-    session = Session()
-
-    # Query State objects and their City objects and print the results
-    for state in session.query(State).order_by(State.id):
-        print(f"{state.id}: {state.name}")
+    session = Session(engine)
+    for state in session.query(State).order_by(State.id).all():
+        print("{}: {}".format(state.id, state.name))
         for city in state.cities:
-            print(f"    {city.id}: {city.name}")
-
-    # Close the session
+            print("    {}: {}".format(city.id, city.name))
     session.close()
