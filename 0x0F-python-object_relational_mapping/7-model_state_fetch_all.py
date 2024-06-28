@@ -1,18 +1,35 @@
 #!/usr/bin/python3
 """
-Contains the class definition of a State and
-an instance Base = declarative_base()
+Lists all State objects from the database hbtn_0e_6_usa
 """
-from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
 
-class State(Base):
-    """
-    State class that links to the MySQL table 'states'.
-    """
-    __tablename__ = 'states'
-    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    name = Column(String(128), nullable=False)
+if __name__ == "__main__":
+    uname = sys.argv[1]
+    pwd = sys.argv[2]
+    db = sys.argv[3]
+
+    engine = create_engine(
+            f'mysql+mysqldb://{uname}:{pwd}@localhost:3306/{db}',
+            pool_pre_ping=True)
+
+    # Create a configured "Session" class
+    Session = sessionmaker(bind=engine)
+
+    # Create a session
+    session = Session()
+
+    # Query all State objects, order by id
+    states = session.query(State).order_by(State.id).all()
+
+    # Print the results
+    for state in states:
+        print(f"{state.id}: {state.name}")
+
+    # Close the session
+    session.close()
