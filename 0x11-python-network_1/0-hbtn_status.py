@@ -1,30 +1,35 @@
 #!/usr/bin/python3
 """
-This module fetches https://alx-intranet.hbtn.io/status using urllib
-and displays the body of the response.
+Fetches data from https://alx-intranet.hbtn.io/status
+Displays the type, content, and UTF-8 encoded content of the response.
 """
-
 import urllib.request
+import urllib.error
+
 
 def fetch_status(url):
     """
-    Fetches the content from the specified URL and prints the response body.
+    Fetches data from a given URL and prints information about the response.
 
     Args:
-        url (str): The URL to fetch the content from.
+    - url (str): The URL to fetch data from.
 
-    Returns:
-        None
+    Prints:
+    - type of the content fetched.
+    - raw content fetched.
+    - UTF-8 decoded content fetched.
     """
     try:
         with urllib.request.urlopen(url) as response:
-            body = response.read()
+            content = response.read()
             print("Body response:")
-            print("\t- type:", type(body))
-            print("\t- content:", body)
-            print("\t- utf8 content:", body.decode('utf-8'))
-    except urllib.error.URLError as e:
-        print(f"Error fetching URL: {e}")
+            print(f"\t- type: {type(content)}")
+            print(f"\t- content: {content}")
+            print(f"\t- utf8 content: {content.decode('utf-8')}")
+
+    except urllib.error.HTTPError as e:
+        print(f"Error code: {e.code}")
+
 
 if __name__ == "__main__":
     url = 'https://alx-intranet.hbtn.io/status'
