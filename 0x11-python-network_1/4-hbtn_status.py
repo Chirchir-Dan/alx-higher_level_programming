@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """
-This script fetches https://alx-intranet.hbtn.io/status using the requests package
-and displays the body of the response in a specified format.
+This script fetches https://alx-intranet.hbtn.io/status using
+the requests package and displays the body of the response in
+a specified format.
 """
 
 import requests
+
 
 def fetch_status(url):
     """
@@ -24,6 +26,7 @@ def fetch_status(url):
         print("\t- content:", response_text)
     except requests.RequestException as e:
         print(f"Error fetching URL: {e}")
+
 
 if __name__ == "__main__":
     url = 'https://alx-intranet.hbtn.io/status'
