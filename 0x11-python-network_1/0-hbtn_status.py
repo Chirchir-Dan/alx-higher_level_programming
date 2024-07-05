@@ -7,6 +7,15 @@ and displays the body of the response.
 import urllib.request
 
 def fetch_status(url):
+    """
+    Fetches the content from the specified URL and prints the response body.
+
+    Args:
+        url (str): The URL to fetch the content from.
+
+    Returns:
+        None
+    """
     try:
         with urllib.request.urlopen(url) as response:
             body = response.read()
