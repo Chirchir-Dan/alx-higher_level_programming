@@ -1,0 +1,16 @@
+{
+  "name": "0x14-javascript-web_scraping",
+  "version": "1.0.0",
+  "description": "- I/O on Node.js and using the `NPM request` framework to interact with the [Star Wars](https://swapi.co/), and  [JSONplaceholder](https://jsonplaceholder.typicode.com).",
+  "main": "0-readme.js",
+  "dependencies": {
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
